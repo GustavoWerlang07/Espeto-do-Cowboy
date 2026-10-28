@@ -7,9 +7,8 @@ import { MenuModal } from './components/MenuModal';
 import { SecondaryButtons } from './components/SecondaryButtons';
 import { OpeningHours } from './components/OpeningHours';
 import { Footer } from './components/Footer';
-import { LinkConfigModal } from './components/LinkConfigModal';
 
-// Official URLs provided by Espeto do Cowboy
+// Official URLs for Espeto do Cowboy
 export const OFFICIAL_IFOOD_URL =
   'https://www.ifood.com.br/delivery/sinop-mt/espeto-do-cowboy-jardim-das-palmeiras/cc11e384-4b97-4a36-af85-2fe2f8e9ad24?utm_medium=share';
 
@@ -26,48 +25,6 @@ export const OFFICIAL_LOCATION_URL =
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isConfigOpen, setIsConfigOpen] = useState(false);
-  const [activePlatformForModal, setActivePlatformForModal] = useState<string | undefined>();
-
-  // Links state with localStorage persistence and official defaults
-  const [ifoodUrl, setIfoodUrl] = useState<string>(() => {
-    return localStorage.getItem('espeto_cowboy_ifood') || OFFICIAL_IFOOD_URL;
-  });
-  const [kitaUrl, setKitaUrl] = useState<string>(() => {
-    return localStorage.getItem('espeto_cowboy_kita') || OFFICIAL_KEETA_URL;
-  });
-  const [googleReviewUrl, setGoogleReviewUrl] = useState<string>(() => {
-    return (
-      localStorage.getItem('espeto_cowboy_google_review') || OFFICIAL_GOOGLE_REVIEW_URL
-    );
-  });
-  const [locationUrl, setLocationUrl] = useState<string>(() => {
-    return localStorage.getItem('espeto_cowboy_location') || OFFICIAL_LOCATION_URL;
-  });
-
-  const handleSaveLinks = (links: {
-    ifoodUrl: string;
-    kitaUrl: string;
-    googleReviewUrl: string;
-    locationUrl?: string;
-  }) => {
-    setIfoodUrl(links.ifoodUrl);
-    setKitaUrl(links.kitaUrl);
-    setGoogleReviewUrl(links.googleReviewUrl);
-    if (links.locationUrl) {
-      setLocationUrl(links.locationUrl);
-      localStorage.setItem('espeto_cowboy_location', links.locationUrl);
-    }
-
-    localStorage.setItem('espeto_cowboy_ifood', links.ifoodUrl);
-    localStorage.setItem('espeto_cowboy_kita', links.kitaUrl);
-    localStorage.setItem('espeto_cowboy_google_review', links.googleReviewUrl);
-  };
-
-  const handlePlaceholderClick = (platformName: string) => {
-    setActivePlatformForModal(platformName);
-    setIsConfigOpen(true);
-  };
 
   return (
     <div className="min-h-screen wood-texture flex flex-col justify-between text-[#ece2d0] selection:bg-[#96261f] selection:text-white relative">
@@ -95,10 +52,9 @@ export default function App() {
           transition={{ duration: 0.55, delay: 0.1, ease: 'easeOut' }}
         >
           <OrderButtons
-            ifoodUrl={ifoodUrl}
-            kitaUrl={kitaUrl}
+            ifoodUrl={OFFICIAL_IFOOD_URL}
+            kitaUrl={OFFICIAL_KEETA_URL}
             whatsappUrl={OFFICIAL_WHATSAPP_URL}
-            onPlaceholderClick={handlePlaceholderClick}
           />
         </motion.div>
 
@@ -118,9 +74,8 @@ export default function App() {
           transition={{ duration: 0.55, delay: 0.26, ease: 'easeOut' }}
         >
           <SecondaryButtons
-            locationUrl={locationUrl}
-            googleReviewUrl={googleReviewUrl}
-            onPlaceholderClick={handlePlaceholderClick}
+            locationUrl={OFFICIAL_LOCATION_URL}
+            googleReviewUrl={OFFICIAL_GOOGLE_REVIEW_URL}
           />
         </motion.div>
 
@@ -139,12 +94,7 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <Footer
-            onOpenConfig={() => {
-              setActivePlatformForModal(undefined);
-              setIsConfigOpen(true);
-            }}
-          />
+          <Footer />
         </motion.div>
       </main>
 
@@ -153,19 +103,6 @@ export default function App() {
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         whatsappUrl={OFFICIAL_WHATSAPP_URL}
-      />
-
-      {/* MODAL DISCRETO PARA DEFINIÇÃO/AJUSTE DE LINKS */}
-      <LinkConfigModal
-        isOpen={isConfigOpen}
-        onClose={() => setIsConfigOpen(false)}
-        ifoodUrl={ifoodUrl}
-        kitaUrl={kitaUrl}
-        googleReviewUrl={googleReviewUrl}
-        locationUrl={locationUrl}
-        whatsappUrl={OFFICIAL_WHATSAPP_URL}
-        activePlatform={activePlatformForModal}
-        onSave={handleSaveLinks}
       />
     </div>
   );

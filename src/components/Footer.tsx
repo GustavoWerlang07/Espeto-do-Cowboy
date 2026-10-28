@@ -1,11 +1,6 @@
 import React from 'react';
-import { Settings } from 'lucide-react';
 
-interface FooterProps {
-  onOpenConfig?: () => void;
-}
-
-export function Footer({ onOpenConfig }: FooterProps) {
+export function Footer() {
   return (
     <footer className="w-full max-w-md mx-auto pt-8 pb-12 px-4 text-center">
       {/* Decorative Rustic Line */}
@@ -27,21 +22,6 @@ export function Footer({ onOpenConfig }: FooterProps) {
       <p className="text-[11px] text-[#7d6e5d] uppercase tracking-wider font-condensed mt-1">
         Sinop — Mato Grosso
       </p>
-
-      {/* Optional discrete link configuration button */}
-      {onOpenConfig && (
-        <div className="mt-4 pt-2">
-          <button
-            type="button"
-            onClick={onOpenConfig}
-            className="inline-flex items-center gap-1 text-[10px] text-[#6b5e4f] hover:text-[#c8963e] transition-colors cursor-pointer"
-            title="Configurar Links de Pedido (iFood, Kita, Google)"
-          >
-            <Settings className="w-3 h-3" />
-            <span>Configurar links</span>
-          </button>
-        </div>
-      )}
     </footer>
   );
 }

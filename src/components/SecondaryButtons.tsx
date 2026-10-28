@@ -5,7 +5,6 @@ import { GoogleIcon } from './BrandIcons';
 interface SecondaryButtonsProps {
   locationUrl?: string;
   googleReviewUrl: string;
-  onPlaceholderClick: (platformName: string, configKey: 'google') => void;
 }
 
 const DEFAULT_MAPS_URL = 'https://maps.app.goo.gl/SsgZpLjprhWtGJqt6?g_st=ic';
@@ -13,18 +12,7 @@ const DEFAULT_MAPS_URL = 'https://maps.app.goo.gl/SsgZpLjprhWtGJqt6?g_st=ic';
 export function SecondaryButtons({
   locationUrl = DEFAULT_MAPS_URL,
   googleReviewUrl,
-  onPlaceholderClick,
 }: SecondaryButtonsProps) {
-  const isGoogleConfigured =
-    googleReviewUrl && googleReviewUrl !== '#' && !googleReviewUrl.includes('INSERIR');
-
-  const handleGoogleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!isGoogleConfigured) {
-      e.preventDefault();
-      onPlaceholderClick('Avaliações do Google', 'google');
-    }
-  };
-
   return (
     <section aria-label="Localização e Avaliações" className="w-full px-4 max-w-md mx-auto mt-4 flex flex-col gap-3">
       {/* LOCALIZAÇÃO: Como Chegar */}
@@ -55,9 +43,8 @@ export function SecondaryButtons({
 
       {/* AVALIAR NO GOOGLE */}
       <a
-        href={isGoogleConfigured ? googleReviewUrl : '#'}
-        onClick={handleGoogleClick}
-        target={isGoogleConfigured ? '_blank' : undefined}
+        href={googleReviewUrl}
+        target="_blank"
         rel="noopener noreferrer"
         className="group relative flex items-center justify-between w-full p-3.5 rounded-xl bg-gradient-to-r from-[#1a140f] to-[#221a14] border border-[#c8963e]/25 hover:border-[#c8963e]/60 active:scale-[0.985] transition-all duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
       >

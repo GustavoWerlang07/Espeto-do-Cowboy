@@ -5,39 +5,19 @@ interface OrderButtonsProps {
   ifoodUrl: string;
   kitaUrl: string;
   whatsappUrl: string;
-  onPlaceholderClick: (platformName: string, configKey: 'ifood' | 'kita') => void;
 }
 
 export function OrderButtons({
   ifoodUrl,
   kitaUrl,
   whatsappUrl,
-  onPlaceholderClick,
 }: OrderButtonsProps) {
-  const isIfoodConfigured = ifoodUrl && ifoodUrl !== '#' && !ifoodUrl.includes('INSERIR');
-  const isKitaConfigured = kitaUrl && kitaUrl !== '#' && !kitaUrl.includes('INSERIR');
-
-  const handleIfoodClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!isIfoodConfigured) {
-      e.preventDefault();
-      onPlaceholderClick('iFood', 'ifood');
-    }
-  };
-
-  const handleKitaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!isKitaConfigured) {
-      e.preventDefault();
-      onPlaceholderClick('Kita (Keeta)', 'kita');
-    }
-  };
-
   return (
     <section aria-label="Pedidos Online" className="w-full flex flex-col gap-3.5 px-4 max-w-md mx-auto">
       {/* 1º — PEDIR PELO IFOOD */}
       <a
-        href={isIfoodConfigured ? ifoodUrl : '#'}
-        onClick={handleIfoodClick}
-        target={isIfoodConfigured ? '_blank' : undefined}
+        href={ifoodUrl}
+        target="_blank"
         rel="noopener noreferrer"
         className="group relative flex items-center w-full h-[64px] px-4 rounded-xl bg-gradient-to-r from-[#1c1612] via-[#241c16] to-[#1e1713] border border-[#c8963e]/25 hover:border-[#ea1d2c]/60 active:scale-[0.985] transition-all duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_22px_rgba(234,29,44,0.22)]"
       >
@@ -54,16 +34,15 @@ export function OrderButtons({
             Pedir pelo iFood
           </span>
           <span className="block text-[11px] text-[#ded2c3]/80 font-normal">
-            {isIfoodConfigured ? 'Entrega rápida e pedidos no app' : '[Configurar link da loja]'}
+            Entrega rápida e pedidos no app
           </span>
         </div>
       </a>
 
       {/* 2º — PEDIR PELO KITA (KEETA) */}
       <a
-        href={isKitaConfigured ? kitaUrl : '#'}
-        onClick={handleKitaClick}
-        target={isKitaConfigured ? '_blank' : undefined}
+        href={kitaUrl}
+        target="_blank"
         rel="noopener noreferrer"
         className="group relative flex items-center w-full h-[64px] px-4 rounded-xl bg-gradient-to-r from-[#1c1612] via-[#241c16] to-[#1e1713] border border-[#c8963e]/25 hover:border-[#ffd100]/60 active:scale-[0.985] transition-all duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_22px_rgba(255,209,0,0.22)]"
       >
@@ -80,7 +59,7 @@ export function OrderButtons({
             Pedir pelo Kita
           </span>
           <span className="block text-[11px] text-[#ded2c3]/80 font-normal">
-            {isKitaConfigured ? 'Peça na plataforma do Kita' : '[Configurar link da loja]'}
+            Peça na plataforma do Kita
           </span>
         </div>
       </a>
