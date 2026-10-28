@@ -1,0 +1,6 @@
+{
+  "name": "Espeto do Cowboy | Sinop - MT",
+  "description": "Cardápio digital e pedidos do Espeto do Cowboy em Sinop, Mato Grosso. Churrascaria cowboy autêntica: iFood, Keeta e WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
