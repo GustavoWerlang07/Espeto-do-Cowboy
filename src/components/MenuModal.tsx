@@ -12,15 +12,15 @@ const MENU_PAGES = [
   {
     id: 'frente',
     title: 'Frente',
-    subtitle: 'Espetos, Marmitas, Adicionais e Porções',
-    src: '/assets/cardapio_frente.jpeg',
+    subtitle: 'Espetos, Marmitas e Porções',
+    src: '/assets/cardapio_frente.jpeg?v=2',
     alt: 'Cardápio Espeto do Cowboy - Frente (Espetos, Simples, Completo, Porções)',
   },
   {
     id: 'verso',
     title: 'Verso',
     subtitle: 'Chapas de Picanha, Costela e Bebidas',
-    src: '/assets/cardapio_verso.jpeg',
+    src: '/assets/cardapio_verso.jpeg?v=2',
     alt: 'Cardápio Espeto do Cowboy - Verso (Chapas e Bebidas)',
   },
 ];
